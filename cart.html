@@ -9,15 +9,24 @@
     *{box-sizing:border-box}
     body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
     .top{background:#fff;border-bottom:1px solid var(--line)}
-    .top .wrap{max-width:1100px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+    .top .wrap{max-width:1100px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:12px}
     .logo{font-weight:700;font-size:22px;color:var(--brand)}
     .nav a{text-decoration:none;color:var(--muted);margin-left:16px}
+    .back-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border:1px solid var(--line);border-radius:8px;
+      background:#fff;color:#333;text-decoration:none;font-size:14px;
+    }
+    .back-btn:hover{background:#f4f4f4}
+
     .page{max-width:1100px;margin:24px auto 60px;padding:0 16px;display:grid;grid-template-columns:2fr 1fr;gap:24px}
     @media(max-width:900px){.page{grid-template-columns:1fr}}
+
     .card{background:#fff;border:1px solid var(--line);border-radius:10px}
     .card .head{padding:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
     .card .head h2{margin:0;font-size:18px}
     .card .body{padding:8px 16px 16px}
+
     .cart-item{display:grid;grid-template-columns:96px 1fr 110px 110px 24px;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
     .cart-item:last-child{border-bottom:none}
     .thumb{width:96px;height:96px;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;background:linear-gradient(45deg,#ff9a9e,#fecfef);color:#fff;font-size:28px}
@@ -29,9 +38,11 @@
     .qty select{width:100%;padding:8px;border:1px solid var(--line);border-radius:6px;font-size:14px;background:#fff}
     .price{text-align:right;font-weight:700}
     .remove{border:none;background:transparent;color:var(--muted);cursor:pointer;font-size:18px;line-height:0}
+
     .promo{display:flex;gap:8px;margin-top:8px}
     .promo input{flex:1;padding:10px;border:1px solid var(--line);border-radius:6px}
     .promo button{padding:10px 14px;border:none;border-radius:6px;background:#333;color:#fff;font-weight:700;cursor:pointer}
+
     .summary .row{display:flex;justify-content:space-between;align-items:center;margin:10px 0;font-size:14px}
     .summary .total{font-size:18px;font-weight:800;border-top:1px dashed var(--line);padding-top:12px;margin-top:12px}
     .cta{margin-top:16px;width:100%;padding:14px;border:none;border-radius:8px;background:var(--brand);color:#fff;font-weight:800;cursor:pointer}
@@ -39,10 +50,12 @@
   </style>
 </head>
 <body>
+  <!-- Top bar with Back -->
   <div class="top">
     <div class="wrap">
+      <a class="back-btn" href="index.html">← Back</a>
       <div class="logo">BeautyHub</div>
-      <div class="nav"><a href="index.html">Continue Shopping</a></div>
+      <div class="nav" style="margin-left:auto"><a href="index.html">Continue Shopping</a></div>
     </div>
   </div>
 

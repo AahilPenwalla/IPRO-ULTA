@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BeautyHub - Beauty & Cosmetics</title>
   <style>
@@ -81,7 +81,6 @@
       <a href="#">📍 Store Locator</a>
       <a href="#">👤 Account</a>
       <a href="#">❤️ Favorites</a>
-      <!-- Link to cart.html -->
       <a href="cart.html">🛍️ Bag <span class="cart-count">0</span></a>
     </div>
   </div>
@@ -118,7 +117,6 @@
     <div class="container">
       <h2 class="section-title">Featured Products</h2>
       <div class="products-grid">
-        <!-- Product 1 -->
         <div class="product-card">
           <div class="product-image">💄</div>
           <div class="product-info">
@@ -128,7 +126,6 @@
             <button class="add-to-cart">Add to Bag</button>
           </div>
         </div>
-        <!-- Product 2 -->
         <div class="product-card">
           <div class="product-image">🧴</div>
           <div class="product-info">
@@ -138,7 +135,6 @@
             <button class="add-to-cart">Add to Bag</button>
           </div>
         </div>
-        <!-- Product 3 -->
         <div class="product-card">
           <div class="product-image">✨</div>
           <div class="product-info">
@@ -148,7 +144,6 @@
             <button class="add-to-cart">Add to Bag</button>
           </div>
         </div>
-        <!-- Product 4 -->
         <div class="product-card">
           <div class="product-image">💋</div>
           <div class="product-info">
@@ -158,7 +153,6 @@
             <button class="add-to-cart">Add to Bag</button>
           </div>
         </div>
-        <!-- Product 5 -->
         <div class="product-card">
           <div class="product-image">👁️</div>
           <div class="product-info">
@@ -168,7 +162,6 @@
             <button class="add-to-cart">Add to Bag</button>
           </div>
         </div>
-        <!-- Product 6 -->
         <div class="product-card">
           <div class="product-image">🌸</div>
           <div class="product-info">
@@ -221,8 +214,8 @@
 </footer>
 
 <script>
-  // Smooth scroll for CTA
-  document.querySelector('.cta-btn').addEventListener('click', e => {
+  // Smooth scroll
+  document.querySelector('.cta-btn').addEventListener('click', e=>{
     e.preventDefault();
     document.querySelector('#products').scrollIntoView({behavior:'smooth'});
   });
@@ -244,17 +237,16 @@
     if(e.key==='Enter'){ const q=e.target.value.trim(); if(q) alert(`Searching for: ${q}`); }
   });
 
-  // ---- Cart storage helpers (shared with cart.html via same LS key) ----
+  // --- Cart storage helpers (shared with cart.html) ---
   const LS_KEY='beautyhub_cart';
   const readCart=()=>{ try{return JSON.parse(localStorage.getItem(LS_KEY))||[];}catch{return[];} };
   const writeCart=(data)=>localStorage.setItem(LS_KEY, JSON.stringify(data));
 
-  // ---- Initialize bag badge from storage ----
+  // --- Initialize bag badge from storage ---
   const bagBadge=document.querySelector('.cart-count');
-  const initCount=readCart().reduce((n,it)=>n+(it.qty||0),0);
-  bagBadge.textContent=initCount;
+  bagBadge.textContent=readCart().reduce((n,it)=>n+(it.qty||0),0);
 
-  // ---- Hook Add to Bag buttons ----
+  // --- Hook Add to Bag buttons ---
   document.querySelectorAll('.add-to-cart').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const card=btn.closest('.product-card');
@@ -270,11 +262,10 @@
       else cart.push({id,brand,name,price,qty:1,icon});
       writeCart(cart);
 
-      const count=cart.reduce((n,it)=>n+it.qty,0);
-      bagBadge.textContent=count;
+      bagBadge.textContent=cart.reduce((n,it)=>n+it.qty,0);
 
       btn.style.background='#28a745'; btn.textContent='Added!';
-      setTimeout(()=>{btn.style.background='#333'; btn.textContent='Add to Bag';},1100);
+      setTimeout(()=>{btn.style.background='#333'; btn.textContent='Add to Bag';},1000);
     });
   });
 </script>
