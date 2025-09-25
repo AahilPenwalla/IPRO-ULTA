@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +6,9 @@
   <title>BeautyHub - Beauty & Cosmetics</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:Arial,Helvetica,sans-serif;line-height:1.6;color:#333}
+    body{font-family:Arial,Helvetica,sans-serif;line-height:1.6;color:#333;overflow-x:hidden}
+
+    /* Header */
     .header{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1);position:sticky;top:0;z-index:1000}
     .header-top{background:#000;color:#fff;text-align:center;padding:8px 0;font-size:14px}
     .header-main{max-width:1200px;margin:0 auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between}
@@ -16,29 +17,47 @@
     .btn{display:inline-block;padding:10px 14px;border-radius:10px;border:1px solid #e6e6e6;text-decoration:none;font-weight:700}
     .btn.dark{background:#333;color:#fff;border:none}
     .btn.gold{background:#ffd700;color:#111;border:none;box-shadow:0 8px 20px rgba(255,215,0,.35)}
+    /* Go to Cart button + badge */
+    .bag-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border:1px solid #e6e6e6;border-radius:10px;background:#fff;text-decoration:none;color:#333;font-weight:700}
+    .bag-btn:hover{background:#f7f7f7}
+    .cart-count{background:#ff6b6b;color:#fff;border-radius:999px;padding:2px 6px;font-size:12px}
+
+    /* Nav */
     .nav-menu{background:#f8f9fa;border-top:1px solid #eee}
     .nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-around;padding:0 20px;flex-wrap:wrap}
     .nav-menu a{display:block;padding:15px 20px;text-decoration:none;color:#333;font-weight:500;text-transform:uppercase;font-size:14px}
     .nav-menu a:hover{background:#ff6b6b;color:#fff}
+
+    /* Hero */
     .hero{background:linear-gradient(135deg,#ff9a9e 0%,#fecfef 50%,#fecfef 100%);padding:80px 20px;text-align:center;color:#fff}
     .hero h1{font-size:48px;margin-bottom:14px;font-weight:bold}
     .hero p{font-size:18px;margin:0 auto 24px;max-width:640px}
     .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+    /* Sections */
     .features,.products{padding:60px 20px}
     .container{max-width:1200px;margin:0 auto}
     .section-title{text-align:center;font-size:32px;margin-bottom:36px;color:#333}
+
+    /* Products */
     .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px}
     .product-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 5px 16px rgba(0,0,0,.08)}
     .product-image{height:180px;background:linear-gradient(45deg,#ff9a9e,#fecfef);display:flex;align-items:center;justify-content:center;font-size:42px;color:#fff}
-    .product-info{padding:16px}.product-brand{font-size:12px;color:#666;letter-spacing:.5px;text-transform:uppercase}
-    .product-name{font-weight:700;margin:6px 0}.product-price{color:#ff6b6b;font-weight:700}
+    .product-info{padding:16px}
+    .product-brand{font-size:12px;color:#666;letter-spacing:.5px;text-transform:uppercase}
+    .product-name{font-weight:700;margin:6px 0}
+    .product-price{color:#ff6b6b;font-weight:700}
     .add-to-cart{width:100%;margin-top:10px;padding:10px;border:none;border-radius:8px;background:#333;color:#fff;font-weight:700;cursor:pointer}
+    .add-to-cart:hover{background:#ff6b6b}
+
+    /* Footer */
     .footer{background:#222;color:#fff;padding:36px 20px 18px;margin-top:40px}
     .footer .container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
     .footer a{color:#ccc;text-decoration:none;display:block;margin:6px 0}
     .footer a:hover{color:#ff6b6b}
     .footer-bottom{text-align:center;margin-top:18px;color:#aaa}
-    @media(max-width:768px){.hero h1{font-size:36px}}
+
+    @keyframes glowPulse{0%,100%{text-shadow:0 0 6px rgba(255,215,0,.6),0 0 12px rgba(255,215,0,.4)}50%{text-shadow:0 0 14px rgba(255,215,0,.95),0 0 28px rgba(255,215,0,.7)}}
   </style>
 </head>
 <body>
@@ -49,6 +68,8 @@
     <div class="header-actions">
       <a class="btn gold" href="aiglow.html">✨ AI Glow</a>
       <a class="btn dark" href="#products">Shop</a>
+      <!-- Go to Cart button -->
+      <a class="bag-btn" href="cart.html">🛍️ Go to Cart <span class="cart-count">0</span></a>
     </div>
   </div>
   <nav class="nav-menu">
@@ -66,6 +87,7 @@
     <div class="cta-row">
       <a class="btn gold" href="aiglow.html">Start AI Glow</a>
       <a class="btn dark" href="#products">Shop Featured</a>
+      <a class="bag-btn" href="cart.html">🛍️ Go to Cart <span class="cart-count">0</span></a>
     </div>
   </section>
 
@@ -100,6 +122,33 @@
             <button class="add-to-cart">Add to Bag</button>
           </div>
         </div>
+        <div class="product-card">
+          <div class="product-image">💋</div>
+          <div class="product-info">
+            <div class="product-brand">Charlotte Tilbury</div>
+            <div class="product-name">Pillow Talk Lipstick</div>
+            <div class="product-price">$38.00</div>
+            <button class="add-to-cart">Add to Bag</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">👁️</div>
+          <div class="product-info">
+            <div class="product-brand">Urban Decay</div>
+            <div class="product-name">Naked3 Eyeshadow Palette</div>
+            <div class="product-price">$56.00</div>
+            <button class="add-to-cart">Add to Bag</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">🌸</div>
+          <div class="product-info">
+            <div class="product-brand">Drunk Elephant</div>
+            <div class="product-name">C-Firma Day Serum</div>
+            <div class="product-price">$80.00</div>
+            <button class="add-to-cart">Add to Bag</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -118,17 +167,47 @@
     <div>
       <h4>Programs</h4>
       <a href="aiglow.html">AI Glow</a>
+      <a href="cart.html">Cart</a>
     </div>
   </div>
   <div class="footer-bottom">© 2024 BeautyHub</div>
 </footer>
 
 <script>
-  // Basic visual feedback for demo
-  document.querySelectorAll('.add-to-cart').forEach(b=>{
-    b.addEventListener('click',()=>{
-      b.textContent='Added!'; b.style.background='#28a745';
-      setTimeout(()=>{ b.textContent='Add to Bag'; b.style.background='#333'; },900);
+  // --- Shared cart storage ---
+  const LS_KEY='beautyhub_cart';
+  const readCart=()=>{ try{return JSON.parse(localStorage.getItem(LS_KEY))||[];}catch{return[];} };
+  const writeCart=(data)=>localStorage.setItem(LS_KEY, JSON.stringify(data));
+
+  // --- Update all badge instances ---
+  function updateBadges(){
+    const count = readCart().reduce((n,it)=>n+(it.qty||0),0);
+    document.querySelectorAll('.cart-count').forEach(el=>el.textContent=count);
+  }
+  updateBadges();
+
+  // --- Add-to-bag handlers ---
+  document.querySelectorAll('.add-to-cart').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const card  = btn.closest('.product-card');
+      const name  = card.querySelector('.product-name').textContent.trim();
+      const brand = card.querySelector('.product-brand').textContent.trim();
+      const price = parseFloat(card.querySelector('.product-price').textContent.replace('$',''));
+      const icon  = card.querySelector('.product-image').textContent.trim();
+      const id    = name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+
+      const cart = readCart();
+      const i = cart.findIndex(x => x.id === id);
+      if (i >= 0) cart[i].qty += 1;
+      else cart.push({ id, brand, name, price, qty: 1, icon });
+      writeCart(cart);
+
+      updateBadges();
+
+      // visual feedback
+      btn.style.background = '#28a745';
+      btn.textContent = 'Added!';
+      setTimeout(() => { btn.style.background = '#333'; btn.textContent = 'Add to Bag'; }, 900);
     });
   });
 </script>
