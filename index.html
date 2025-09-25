@@ -20,9 +20,26 @@
     .header-actions a:hover{color:#ff6b6b}
     .cart-count{background:#ff6b6b;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:12px;margin-left:5px}
     .nav-menu{background:#f8f9fa;border-top:1px solid #eee}
-    .nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-around;padding:0 20px}
+    .nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-around;padding:0 20px;flex-wrap:wrap}
     .nav-menu a{display:block;padding:15px 20px;text-decoration:none;color:#333;font-weight:500;text-transform:uppercase;font-size:14px;letter-spacing:.5px;transition:all .3s}
     .nav-menu a:hover{background:#ff6b6b;color:#fff}
+
+    /* Gold glowing nav link */
+    .nav-menu a.nav-glow{
+      color:#b8860b;
+      text-shadow:0 0 6px rgba(255,215,0,.7), 0 0 14px rgba(255,215,0,.5);
+      animation:glowPulse 2s ease-in-out infinite;
+    }
+    .nav-menu a.nav-glow:hover{
+      background:#333;
+      color:#ffd700;
+      box-shadow:0 0 10px rgba(255,215,0,.8), 0 0 22px rgba(255,215,0,.6);
+    }
+    @keyframes glowPulse{
+      0%,100%{ text-shadow:0 0 6px rgba(255,215,0,.6),0 0 12px rgba(255,215,0,.4) }
+      50%{    text-shadow:0 0 14px rgba(255,215,0,.95),0 0 28px rgba(255,215,0,.7) }
+    }
+
     .hero{background:linear-gradient(135deg,#ff9a9e 0%,#fecfef 50%,#fecfef 100%);padding:80px 20px;text-align:center;color:#fff}
     .hero h1{font-size:48px;margin-bottom:20px;font-weight:bold}
     .hero p{font-size:20px;margin:0 auto 30px;max-width:600px}
@@ -78,6 +95,7 @@
       <button class="search-btn">🔍</button>
     </div>
     <div class="header-actions">
+      <a href="upload.html">🖼️ Upload Skincare</a>
       <a href="#">📍 Store Locator</a>
       <a href="#">👤 Account</a>
       <a href="#">❤️ Favorites</a>
@@ -86,9 +104,17 @@
   </div>
   <nav class="nav-menu">
     <div class="nav-container">
-      <a href="#">New</a><a href="#">Makeup</a><a href="#">Skincare</a><a href="#">Fragrance</a>
-      <a href="#">Hair</a><a href="#">Tools & Brushes</a><a href="#">Bath & Body</a><a href="#">Men</a>
-      <a href="#">Gifts</a><a href="#">Sale</a>
+      <a href="aiglow.html" class="nav-glow">AI Glow</a>
+      <a href="#">New</a>
+      <a href="#">Makeup</a>
+      <a href="#">Skincare</a>
+      <a href="#">Fragrance</a>
+      <a href="#">Hair</a>
+      <a href="#">Tools & Brushes</a>
+      <a href="#">Bath & Body</a>
+      <a href="#">Men</a>
+      <a href="#">Gifts</a>
+      <a href="#">Sale</a>
     </div>
   </nav>
 </header>
@@ -237,16 +263,16 @@
     if(e.key==='Enter'){ const q=e.target.value.trim(); if(q) alert(`Searching for: ${q}`); }
   });
 
-  // --- Cart storage helpers (shared with cart.html) ---
+  // Cart storage helpers
   const LS_KEY='beautyhub_cart';
   const readCart=()=>{ try{return JSON.parse(localStorage.getItem(LS_KEY))||[];}catch{return[];} };
   const writeCart=(data)=>localStorage.setItem(LS_KEY, JSON.stringify(data));
 
-  // --- Initialize bag badge from storage ---
+  // Badge from storage
   const bagBadge=document.querySelector('.cart-count');
   bagBadge.textContent=readCart().reduce((n,it)=>n+(it.qty||0),0);
 
-  // --- Hook Add to Bag buttons ---
+  // Add-to-bag handlers
   document.querySelectorAll('.add-to-cart').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const card=btn.closest('.product-card');
