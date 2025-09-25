@@ -1,390 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BeautyHub | Cart</title>
   <style>
-    :root{
-      --brand:#ff6b6b;
-      --ink:#222;
-      --muted:#666;
-      --line:#e6e6e6;
-      --bg:#f7f7f7;
-      --ok:#2e7d32;
-    }
+    :root{--brand:#ff6b6b;--ink:#222;--muted:#666;--line:#e6e6e6;--bg:#f7f7f7}
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: Arial, Helvetica, sans-serif;
-      color:var(--ink);
-      background:var(--bg);
-    }
-    /* Top bar */
-    .topbar{
-      background:#fff;
-      border-bottom:1px solid var(--line);
-    }
-    .topbar .wrap{
-      max-width:1100px;
-      margin:0 auto;
-      padding:14px 16px;
-      display:flex;
-      align-items:center;
-      gap:16px;
-    }
-    .logo{
-      font-weight:700;
-      font-size:22px;
-      color:var(--brand);
-      letter-spacing:.5px;
-    }
-    .crumbs{
-      font-size:13px;
-      color:var(--muted);
-    }
-    .crumbs a{color:var(--muted); text-decoration:none}
-    .banner{
-      background:#fff;
-      border-bottom:1px solid var(--line);
-    }
-    .banner .wrap{
-      max-width:1100px;
-      margin:0 auto;
-      padding:10px 16px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      color:#0b5f13;
-      font-size:14px;
-    }
-    .banner .tag{
-      background:#e9f7ec;
-      color:#0b5f13;
-      border:1px solid #cdebd4;
-      padding:2px 8px;
-      border-radius:12px;
-      font-weight:700;
-      font-size:12px;
-    }
-
-    /* Layout */
-    .page{
-      max-width:1100px;
-      margin:20px auto 60px;
-      padding:0 16px;
-      display:grid;
-      grid-template-columns:2fr 1fr;
-      gap:24px;
-    }
-    @media (max-width: 900px){
-      .page{grid-template-columns:1fr}
-      .summary{position:static}
-    }
-
-    /* Card shells */
-    .card{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:10px;
-    }
-    .card .head{
-      padding:16px;
-      border-bottom:1px solid var(--line);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-    .card .head h2{
-      margin:0;
-      font-size:18px;
-      font-weight:700;
-    }
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+    .top{background:#fff;border-bottom:1px solid var(--line)}
+    .top .wrap{max-width:1100px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+    .logo{font-weight:700;font-size:22px;color:var(--brand)}
+    .nav a{text-decoration:none;color:var(--muted);margin-left:16px}
+    .page{max-width:1100px;margin:24px auto 60px;padding:0 16px;display:grid;grid-template-columns:2fr 1fr;gap:24px}
+    @media(max-width:900px){.page{grid-template-columns:1fr}}
+    .card{background:#fff;border:1px solid var(--line);border-radius:10px}
+    .card .head{padding:16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+    .card .head h2{margin:0;font-size:18px}
     .card .body{padding:8px 16px 16px}
-
-    /* Cart list */
-    .cart-item{
-      display:grid;
-      grid-template-columns:96px 1fr 110px 110px 24px;
-      gap:16px;
-      padding:16px 0;
-      border-bottom:1px solid var(--line);
-      align-items:center;
-    }
+    .cart-item{display:grid;grid-template-columns:96px 1fr 110px 110px 24px;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
     .cart-item:last-child{border-bottom:none}
-    .thumb{
-      width:96px;height:96px;border:1px solid var(--line);
-      border-radius:8px;display:flex;align-items:center;justify-content:center;
-      background:linear-gradient(45deg,#ff9a9e,#fecfef);
-      color:#fff;font-size:28px;
-    }
-    .title{
-      display:flex;flex-direction:column;gap:6px;
-    }
+    .thumb{width:96px;height:96px;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;background:linear-gradient(45deg,#ff9a9e,#fecfef);color:#fff;font-size:28px}
     .brand{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
     .name{font-weight:700}
     .meta{font-size:12px;color:var(--muted)}
-    .qty select{
-      width:100%;
-      padding:8px;
-      border:1px solid var(--line);
-      border-radius:6px;
-      background:#fff;
-      font-size:14px;
-    }
-    .price,.line-total{
-      font-weight:700;
-      text-align:right;
-    }
-    .remove{
-      border:none;background:transparent;color:var(--muted);cursor:pointer;
-      font-size:18px; line-height:0;
-    }
-    .row-actions{
-      margin-top:6px;font-size:12px;display:flex;gap:12px;
-    }
-    .link{
-      color:var(--brand);cursor:pointer;text-decoration:none;border:none;background:none;padding:0;font:inherit;
-    }
-
-    /* Promo */
-    .promo{
-      display:flex;gap:8px;margin-top:8px;
-    }
-    .promo input{
-      flex:1;padding:10px;border:1px solid var(--line);border-radius:6px;font-size:14px;
-    }
-    .promo button{
-      padding:10px 14px;border:none;border-radius:6px;background:var(--ink);color:#fff;font-weight:700;cursor:pointer;
-    }
-
-    /* Summary */
-    .summary{
-      position:sticky; top:16px; height:fit-content;
-    }
-    .summary .row{
-      display:flex;justify-content:space-between;align-items:center;margin:10px 0;font-size:14px;
-    }
-    .summary .row.total{
-      font-size:18px;font-weight:800;border-top:1px dashed var(--line);padding-top:12px;margin-top:12px;
-    }
+    .row-actions{margin-top:6px;font-size:12px;display:flex;gap:12px}
+    .link{color:var(--brand);cursor:pointer;text-decoration:none;border:none;background:none;padding:0;font:inherit}
+    .qty select{width:100%;padding:8px;border:1px solid var(--line);border-radius:6px;font-size:14px;background:#fff}
+    .price{text-align:right;font-weight:700}
+    .remove{border:none;background:transparent;color:var(--muted);cursor:pointer;font-size:18px;line-height:0}
+    .promo{display:flex;gap:8px;margin-top:8px}
+    .promo input{flex:1;padding:10px;border:1px solid var(--line);border-radius:6px}
+    .promo button{padding:10px 14px;border:none;border-radius:6px;background:#333;color:#fff;font-weight:700;cursor:pointer}
+    .summary .row{display:flex;justify-content:space-between;align-items:center;margin:10px 0;font-size:14px}
+    .summary .total{font-size:18px;font-weight:800;border-top:1px dashed var(--line);padding-top:12px;margin-top:12px}
+    .cta{margin-top:16px;width:100%;padding:14px;border:none;border-radius:8px;background:var(--brand);color:#fff;font-weight:800;cursor:pointer}
     .note{font-size:12px;color:var(--muted);margin-top:6px}
-    .cta{
-      margin-top:16px;width:100%;padding:14px;border:none;border-radius:8px;background:var(--brand);color:#fff;font-weight:800;cursor:pointer;
-    }
-    .cta:disabled{opacity:.6;cursor:not-allowed}
-    .helper{
-      margin-top:8px;font-size:12px;color:var(--muted);text-align:center;
-    }
-    .free-ship{color:var(--ok);font-weight:700;font-size:13px;margin-top:6px}
   </style>
 </head>
 <body>
-  <!-- Top -->
-  <div class="topbar">
+  <div class="top">
     <div class="wrap">
       <div class="logo">BeautyHub</div>
-      <div class="crumbs">Bag & Checkout › Cart</div>
-    </div>
-  </div>
-  <div class="banner">
-    <div class="wrap">
-      <span class="tag">Free Shipping</span>
-      Free standard shipping on orders over $35.
+      <div class="nav"><a href="index.html">Continue Shopping</a></div>
     </div>
   </div>
 
-  <!-- Main -->
   <div class="page">
-    <!-- Left: Cart -->
+    <!-- Cart -->
     <div class="card">
-      <div class="head">
-        <h2>Your Bag</h2>
-        <div id="itemCount" class="muted"></div>
-      </div>
-      <div class="body" id="cartBody">
-        <!-- cart items injected here -->
-      </div>
+      <div class="head"><h2>Your Bag</h2><div id="itemCount"></div></div>
+      <div class="body" id="cartBody"></div>
       <div class="body">
         <div class="promo">
-          <input id="promoCode" placeholder="Promo code"/>
+          <input id="promoCode" placeholder="Promo code">
           <button id="applyPromo">Apply</button>
         </div>
-        <div class="note">Promo application is simulated.</div>
+        <div class="note">Promos and checkout are simulated.</div>
       </div>
     </div>
 
-    <!-- Right: Summary -->
-    <div class="summary card">
+    <!-- Summary -->
+    <div class="card summary">
       <div class="head"><h2>Order Summary</h2></div>
       <div class="body">
         <div class="row"><span>Subtotal</span><span id="sumSubtotal">$0.00</span></div>
         <div class="row"><span>Estimated Shipping</span><span id="sumShipping">$0.00</span></div>
         <div class="row"><span>Estimated Tax</span><span id="sumTax">$0.00</span></div>
         <div class="row total"><span>Total</span><span id="sumTotal">$0.00</span></div>
-        <div class="free-ship" id="shipMsg"></div>
         <button class="cta" id="checkoutBtn">Proceed to Checkout</button>
-        <div class="helper">Checkout is a placeholder for demo.</div>
+        <div class="note" id="shipMsg"></div>
       </div>
     </div>
   </div>
 
-  <script>
-    // ----- Data source -----
-    const LS_KEY = 'beautyhub_cart';
-    const sample = [
-      { id:'rb-blush', brand:'Rare Beauty', name:'Soft Pinch Liquid Blush', price:20.00, qty:1, icon:'💄' },
-      { id:'to-nia',   brand:'The Ordinary', name:'Niacinamide 10% + Zinc 1%', price:7.90, qty:2, icon:'🧴' },
-      { id:'fb-kill',  brand:'Fenty Beauty', name:'Killawatt Freestyle Highlighter', price:38.00, qty:1, icon:'✨' }
-    ];
-    let cart = [];
+<script>
+  // Shared storage key with index.html
+  const LS_KEY='beautyhub_cart';
+  const readCart=()=>{ try{return JSON.parse(localStorage.getItem(LS_KEY))||[];}catch{return[];} };
+  const writeCart=(data)=>localStorage.setItem(LS_KEY, JSON.stringify(data));
 
-    function loadCart(){
-      try{
-        const raw = localStorage.getItem(LS_KEY);
-        cart = raw ? JSON.parse(raw) : sample;
-      }catch(e){ cart = sample; }
-    }
-    function saveCart(){
-      localStorage.setItem(LS_KEY, JSON.stringify(cart));
-    }
+  // DOM refs
+  const cartBody=document.getElementById('cartBody');
+  const itemCount=document.getElementById('itemCount');
+  const sumSubtotal=document.getElementById('sumSubtotal');
+  const sumShipping=document.getElementById('sumShipping');
+  const sumTax=document.getElementById('sumTax');
+  const sumTotal=document.getElementById('sumTotal');
+  const shipMsg=document.getElementById('shipMsg');
 
-    // ----- DOM refs -----
-    const cartBody = document.getElementById('cartBody');
-    const itemCount = document.getElementById('itemCount');
-    const sumSubtotal = document.getElementById('sumSubtotal');
-    const sumShipping = document.getElementById('sumShipping');
-    const sumTax = document.getElementById('sumTax');
-    const sumTotal = document.getElementById('sumTotal');
-    const shipMsg = document.getElementById('shipMsg');
+  const fmt=n=>`$${n.toFixed(2)}`;
+  const shippingFor=s=> s>=35?0:5.99;
+  const taxFor=s=> +(s*0.0875).toFixed(2);
 
-    // ----- Helpers -----
-    const fmt = n => `$${n.toFixed(2)}`;
+  let cart=readCart();
 
-    function shippingFor(subtotal){
-      // Ulta-like: free over $35
-      return subtotal >= 35 ? 0 : 5.99;
-    }
-    function taxFor(subtotal){
-      // Dummy 8.75%
-      return +(subtotal * 0.0875).toFixed(2);
+  function render(){
+    cartBody.innerHTML='';
+    if(cart.length===0){
+      itemCount.textContent='0 items';
+      cartBody.innerHTML=`<div style="padding:24px;text-align:center;color:#666">
+        Your bag is empty. <a class="link" href="index.html">Continue shopping</a>
+      </div>`;
+      sumSubtotal.textContent='$0.00'; sumShipping.textContent='$0.00'; sumTax.textContent='$0.00'; sumTotal.textContent='$0.00';
+      shipMsg.textContent='';
+      document.getElementById('checkoutBtn').disabled=true;
+      return;
     }
 
-    // ----- Render -----
-    function render(){
-      cartBody.innerHTML = '';
-      let subtotal = 0;
-      let count = 0;
+    let subtotal=0, count=0;
+    cart.forEach((it,idx)=>{
+      const line=+(it.price*it.qty).toFixed(2);
+      subtotal+=line; count+=it.qty;
 
-      if(cart.length === 0){
-        cartBody.innerHTML = `
-          <div style="padding:24px;text-align:center;color:#666">
-            Your bag is empty. <a class="link" href="index.html">Continue shopping</a>
-          </div>`;
-      }
-
-      cart.forEach((it, idx)=>{
-        const line = +(it.price * it.qty).toFixed(2);
-        subtotal += line;
-        count += it.qty;
-
-        const row = document.createElement('div');
-        row.className = 'cart-item';
-        row.innerHTML = `
-          <div class="thumb">${it.icon || '🛍️'}</div>
-          <div class="title">
-            <div class="brand">${it.brand || ''}</div>
-            <div class="name">${it.name}</div>
-            <div class="meta">Item #${it.id}</div>
-            <div class="row-actions">
-              <button class="link" onclick="saveForLater(${idx})">Save for later</button>
-              <button class="link" onclick="moveToFavorites(${idx})">Move to favorites</button>
-            </div>
+      const row=document.createElement('div');
+      row.className='cart-item';
+      row.innerHTML=`
+        <div class="thumb">${it.icon||'🛍️'}</div>
+        <div>
+          <div class="brand">${it.brand||''}</div>
+          <div class="name">${it.name}</div>
+          <div class="meta">Item #${it.id}</div>
+          <div class="row-actions">
+            <button class="link" onclick="saveForLater(${idx})">Save for later</button>
+            <button class="link" onclick="moveToFavorites(${idx})">Move to favorites</button>
           </div>
-          <div class="qty">
-            <select onchange="changeQty(${idx}, this.value)">
-              ${[...Array(10)].map((_,i)=>`<option value="${i+1}" ${it.qty===i+1?'selected':''}>Qty ${i+1}</option>`).join('')}
-            </select>
-          </div>
-          <div class="price">${fmt(it.price)}</div>
-          <button class="remove" aria-label="Remove item" onclick="removeItem(${idx})">✕</button>
-        `;
-        // append a second line for line total beneath price on small screens
-        const totalDiv = document.createElement('div');
-        totalDiv.style.gridColumn = '1 / -1';
-        totalDiv.style.textAlign = 'right';
-        totalDiv.style.fontSize = '13px';
-        totalDiv.style.color = '#444';
-        totalDiv.innerHTML = `<span style="font-weight:700">Line total:</span> ${fmt(line)}`;
-        row.appendChild(totalDiv);
-
-        cartBody.appendChild(row);
-      });
-
-      // Counts
-      itemCount.textContent = `${count} item${count!==1?'s':''}`;
-
-      // Summary
-      const ship = shippingFor(subtotal);
-      const tax = taxFor(subtotal);
-      const total = +(subtotal + ship + tax).toFixed(2);
-
-      sumSubtotal.textContent = fmt(+subtotal.toFixed(2));
-      sumShipping.textContent = ship === 0 ? 'Free' : fmt(ship);
-      sumTax.textContent = fmt(tax);
-      sumTotal.textContent = fmt(total);
-
-      // Free ship message
-      if(subtotal >= 35){
-        shipMsg.textContent = 'You have free shipping.';
-      }else{
-        const remain = (35 - subtotal).toFixed(2);
-        shipMsg.textContent = `Add $${remain} more for free shipping.`;
-      }
-
-      // Enable/disable checkout
-      document.getElementById('checkoutBtn').disabled = cart.length === 0;
-    }
-
-    // ----- Actions -----
-    function changeQty(idx, val){
-      cart[idx].qty = Math.max(1, parseInt(val,10) || 1);
-      saveCart(); render();
-    }
-    function removeItem(idx){
-      cart.splice(idx,1);
-      saveCart(); render();
-    }
-    function saveForLater(idx){
-      // Demo only: just remove from cart
-      cart.splice(idx,1);
-      saveCart(); render();
-      alert('Saved for later (demo).');
-    }
-    function moveToFavorites(idx){
-      // Demo only
-      alert('Moved to favorites (demo).');
-    }
-    document.getElementById('applyPromo').addEventListener('click', ()=>{
-      const code = document.getElementById('promoCode').value.trim().toUpperCase();
-      if(!code){ alert('Enter a promo code.'); return; }
-      // Demo rule: BEAUTY10 gives 10% off subtotal
-      if(code === 'BEAUTY10'){
-        // apply virtual discount by reducing prices proportionally
-        cart = cart.map(it => ({...it, price:+(it.price*0.9).toFixed(2)}));
-        saveCart(); render();
-        alert('Promo applied: 10% off subtotal (demo).');
-      }else{
-        alert('Invalid or unsupported code (demo).');
-      }
-    });
-    document.getElementById('checkoutBtn').addEventListener('click', ()=>{
-      alert('Checkout flow is a placeholder for demo.');
+        </div>
+        <div class="qty">
+          <select onchange="changeQty(${idx}, this.value)">
+            ${Array.from({length:10},(_,i)=>`<option value="${i+1}" ${it.qty===i+1?'selected':''}>Qty ${i+1}</option>`).join('')}
+          </select>
+        </div>
+        <div class="price">${fmt(it.price)}<br><span style="font-size:12px;color:#666">Line: ${fmt(line)}</span></div>
+        <button class="remove" aria-label="Remove" onclick="removeItem(${idx})">✕</button>
+      `;
+      cartBody.appendChild(row);
     });
 
-    // ----- Init -----
-    loadCart();
-    render();
-  </script>
+    itemCount.textContent=`${count} item${count!==1?'s':''}`;
+    const ship=shippingFor(subtotal);
+    const tax=taxFor(subtotal);
+    const total=+(subtotal+ship+tax).toFixed(2);
+
+    sumSubtotal.textContent=fmt(+subtotal.toFixed(2));
+    sumShipping.textContent=ship===0?'Free':fmt(ship);
+    sumTax.textContent=fmt(tax);
+    sumTotal.textContent=fmt(total);
+    shipMsg.textContent= subtotal>=35 ? 'Free shipping applied.' : `Add $${(35 - subtotal).toFixed(2)} more for free shipping.`;
+    document.getElementById('checkoutBtn').disabled=false;
+  }
+
+  // Exposed actions
+  window.changeQty=(idx,val)=>{ cart[idx].qty=Math.max(1,parseInt(val,10)||1); writeCart(cart); render(); };
+  window.removeItem=(idx)=>{ cart.splice(idx,1); writeCart(cart); render(); };
+  window.saveForLater=(idx)=>{ cart.splice(idx,1); writeCart(cart); render(); alert('Saved for later (demo).'); };
+  window.moveToFavorites=(idx)=>{ alert('Moved to favorites (demo).'); };
+
+  document.getElementById('applyPromo').addEventListener('click', ()=>{
+    const code=document.getElementById('promoCode').value.trim().toUpperCase();
+    if(!code) return alert('Enter a promo code.');
+    if(code==='BEAUTY10'){
+      cart=cart.map(it=>({...it, price:+(it.price*0.9).toFixed(2)}));
+      writeCart(cart); render(); alert('Promo applied: 10% off (demo).');
+    }else{
+      alert('Invalid or unsupported code (demo).');
+    }
+  });
+
+  document.getElementById('checkoutBtn').addEventListener('click', ()=>{
+    alert('Checkout is a placeholder for demo.');
+  });
+
+  render();
+</script>
 </body>
 </html>

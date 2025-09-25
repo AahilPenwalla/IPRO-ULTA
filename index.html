@@ -1,677 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeautyHub - Beauty & Cosmetics</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .header {
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-top {
-            background: #000;
-            color: white;
-            text-align: center;
-            padding: 8px 0;
-            font-size: 14px;
-        }
-
-        .header-main {
-            padding: 15px 0;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 20px;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #ff6b6b;
-        }
-
-        .search-bar {
-            flex: 1;
-            max-width: 500px;
-            margin: 0 40px;
-            position: relative;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 12px 50px 12px 20px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .search-bar input:focus {
-            border-color: #ff6b6b;
-        }
-
-        .search-btn {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            font-size: 18px;
-            color: #666;
-            cursor: pointer;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-
-        .header-actions a {
-            text-decoration: none;
-            color: #333;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: color 0.3s;
-        }
-
-        .header-actions a:hover {
-            color: #ff6b6b;
-        }
-
-        .cart-count {
-            background: #ff6b6b;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            margin-left: 5px;
-        }
-
-        .nav-menu {
-            background: #f8f9fa;
-            padding: 0;
-            border-top: 1px solid #eee;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-around;
-            padding: 0 20px;
-        }
-
-        .nav-menu a {
-            display: block;
-            padding: 15px 20px;
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            text-transform: uppercase;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s;
-        }
-
-        .nav-menu a:hover {
-            background: #ff6b6b;
-            color: white;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-            padding: 80px 20px;
-            text-align: center;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-btn {
-            background: #333;
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-
-        .features {
-            padding: 80px 20px;
-            background: white;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 60px;
-            color: #333;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .feature-card {
-            text-align: center;
-            padding: 40px 30px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: #ff6b6b;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            color: white;
-            margin: 0 auto 20px;
-        }
-
-        .products {
-            padding: 80px 20px;
-            background: #f8f9fa;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, #ff9a9e, #fecfef);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            color: white;
-        }
-
-        .product-info {
-            padding: 20px;
-        }
-
-        .product-brand {
-            font-size: 12px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .product-name {
-            font-size: 16px;
-            font-weight: bold;
-            margin: 8px 0;
-            color: #333;
-        }
-
-        .product-price {
-            font-size: 18px;
-            color: #ff6b6b;
-            font-weight: bold;
-        }
-
-        .add-to-cart {
-            width: 100%;
-            background: #333;
-            color: white;
-            border: none;
-            padding: 12px;
-            margin-top: 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        .add-to-cart:hover {
-            background: #ff6b6b;
-        }
-
-        .newsletter {
-            background: #333;
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .newsletter h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-
-        .newsletter-form {
-            max-width: 400px;
-            margin: 30px auto 0;
-            display: flex;
-            gap: 10px;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-        }
-
-        .newsletter-form button {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .newsletter-form button:hover {
-            background: #ff5555;
-        }
-
-        .footer {
-            background: #222;
-            color: white;
-            padding: 40px 20px 20px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 20px;
-            color: #ff6b6b;
-        }
-
-        .footer-section a {
-            color: #ccc;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: #ff6b6b;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-            color: #999;
-        }
-
-        @media (max-width: 768px) {
-            .header-main {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .search-bar {
-                max-width: 100%;
-                margin: 0;
-            }
-
-            .nav-container {
-                flex-direction: column;
-            }
-
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .newsletter-form {
-                flex-direction: column;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BeautyHub - Beauty & Cosmetics</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:Arial,Helvetica,sans-serif;line-height:1.6;color:#333}
+    .header{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.1);position:sticky;top:0;z-index:1000}
+    .header-top{background:#000;color:#fff;text-align:center;padding:8px 0;font-size:14px}
+    .header-main{max-width:1200px;margin:0 auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:28px;font-weight:bold;color:#ff6b6b}
+    .search-bar{flex:1;max-width:500px;margin:0 40px;position:relative}
+    .search-bar input{width:100%;padding:12px 50px 12px 20px;border:2px solid #ddd;border-radius:25px;font-size:16px;outline:none;transition:border-color .3s}
+    .search-bar input:focus{border-color:#ff6b6b}
+    .search-btn{position:absolute;right:15px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:18px;color:#666;cursor:pointer}
+    .header-actions{display:flex;align-items:center;gap:25px}
+    .header-actions a{text-decoration:none;color:#333;font-size:14px;display:flex;align-items:center;gap:5px;transition:color .3s}
+    .header-actions a:hover{color:#ff6b6b}
+    .cart-count{background:#ff6b6b;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:12px;margin-left:5px}
+    .nav-menu{background:#f8f9fa;border-top:1px solid #eee}
+    .nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-around;padding:0 20px}
+    .nav-menu a{display:block;padding:15px 20px;text-decoration:none;color:#333;font-weight:500;text-transform:uppercase;font-size:14px;letter-spacing:.5px;transition:all .3s}
+    .nav-menu a:hover{background:#ff6b6b;color:#fff}
+    .hero{background:linear-gradient(135deg,#ff9a9e 0%,#fecfef 50%,#fecfef 100%);padding:80px 20px;text-align:center;color:#fff}
+    .hero h1{font-size:48px;margin-bottom:20px;font-weight:bold}
+    .hero p{font-size:20px;margin:0 auto 30px;max-width:600px}
+    .cta-btn{background:#333;color:#fff;padding:15px 40px;border:none;border-radius:30px;font-size:18px;font-weight:bold;text-decoration:none;display:inline-block;transition:transform .3s,box-shadow .3s}
+    .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.2)}
+    .features,.products{padding:80px 20px}
+    .features{background:#fff}
+    .products{background:#f8f9fa}
+    .container{max-width:1200px;margin:0 auto}
+    .section-title{text-align:center;font-size:36px;margin-bottom:60px;color:#333}
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px}
+    .feature-card{text-align:center;padding:40px 30px;background:#f8f9fa;border-radius:15px;transition:transform .3s,box-shadow .3s}
+    .feature-card:hover{transform:translateY(-5px);box-shadow:0 15px 35px rgba(0,0,0,.1)}
+    .feature-icon{width:80px;height:80px;background:#ff6b6b;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;margin:0 auto 20px}
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-top:40px}
+    .product-card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,.1);transition:transform .3s,box-shadow .3s}
+    .product-card:hover{transform:translateY(-10px);box-shadow:0 15px 35px rgba(0,0,0,.2)}
+    .product-image{width:100%;height:200px;background:linear-gradient(45deg,#ff9a9e,#fecfef);display:flex;align-items:center;justify-content:center;font-size:48px;color:#fff}
+    .product-info{padding:20px}
+    .product-brand{font-size:12px;color:#666;text-transform:uppercase;letter-spacing:1px}
+    .product-name{font-size:16px;font-weight:bold;margin:8px 0;color:#333}
+    .product-price{font-size:18px;color:#ff6b6b;font-weight:bold}
+    .add-to-cart{width:100%;background:#333;color:#fff;border:none;padding:12px;margin-top:15px;border-radius:8px;cursor:pointer;font-weight:bold;transition:background .3s}
+    .add-to-cart:hover{background:#ff6b6b}
+    .newsletter{background:#333;color:#fff;padding:60px 20px;text-align:center}
+    .newsletter h2{font-size:32px;margin-bottom:20px}
+    .newsletter-form{max-width:400px;margin:30px auto 0;display:flex;gap:10px}
+    .newsletter-form input{flex:1;padding:15px;border:none;border-radius:25px;font-size:16px}
+    .newsletter-form button{background:#ff6b6b;color:#fff;border:none;padding:15px 30px;border-radius:25px;font-weight:bold;cursor:pointer;transition:background .3s}
+    .newsletter-form button:hover{background:#ff5555}
+    .footer{background:#222;color:#fff;padding:40px 20px 20px}
+    .footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:40px}
+    .footer-section h3{margin-bottom:20px;color:#ff6b6b}
+    .footer-section a{color:#ccc;text-decoration:none;display:block;margin-bottom:10px;transition:color .3s}
+    .footer-section a:hover{color:#ff6b6b}
+    .footer-bottom{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid #444;color:#999}
+    @media (max-width:768px){
+      .header-main{flex-direction:column;gap:20px}
+      .search-bar{max-width:100%;margin:0}
+      .nav-container{flex-direction:column}
+      .hero h1{font-size:36px}
+      .newsletter-form{flex-direction:column}
+    }
+  </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-top">
-            Free shipping on orders over $35! | Beauty Insider members get free standard shipping
+<header class="header">
+  <div class="header-top">Free shipping on orders over $35! | Beauty Insider members get free standard shipping</div>
+  <div class="header-main">
+    <div class="logo">BeautyHub</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for products, brands, or services...">
+      <button class="search-btn">🔍</button>
+    </div>
+    <div class="header-actions">
+      <a href="#">📍 Store Locator</a>
+      <a href="#">👤 Account</a>
+      <a href="#">❤️ Favorites</a>
+      <!-- Link to cart.html -->
+      <a href="cart.html">🛍️ Bag <span class="cart-count">0</span></a>
+    </div>
+  </div>
+  <nav class="nav-menu">
+    <div class="nav-container">
+      <a href="#">New</a><a href="#">Makeup</a><a href="#">Skincare</a><a href="#">Fragrance</a>
+      <a href="#">Hair</a><a href="#">Tools & Brushes</a><a href="#">Bath & Body</a><a href="#">Men</a>
+      <a href="#">Gifts</a><a href="#">Sale</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <h1>Discover Your Beauty</h1>
+      <p>Explore thousands of products from your favorite brands. From makeup to skincare, we have everything you need to feel beautiful.</p>
+      <a href="#products" class="cta-btn">Shop Now</a>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Why Shop With Us?</h2>
+      <div class="features-grid">
+        <div class="feature-card"><div class="feature-icon">🚚</div><h3>Free Shipping</h3><p>Free standard shipping on orders over $35. Beauty Insider members get free shipping on any order.</p></div>
+        <div class="feature-card"><div class="feature-icon">↩️</div><h3>Easy Returns</h3><p>Not satisfied? Return any product within 60 days for a full refund or exchange.</p></div>
+        <div class="feature-card"><div class="feature-icon">⭐</div><h3>Beauty Insider</h3><p>Join our loyalty program for exclusive deals, birthday gifts, and points on every purchase.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="products" id="products">
+    <div class="container">
+      <h2 class="section-title">Featured Products</h2>
+      <div class="products-grid">
+        <!-- Product 1 -->
+        <div class="product-card">
+          <div class="product-image">💄</div>
+          <div class="product-info">
+            <div class="product-brand">Rare Beauty</div>
+            <div class="product-name">Soft Pinch Liquid Blush</div>
+            <div class="product-price">$20.00</div>
+            <button class="add-to-cart">Add to Bag</button>
+          </div>
         </div>
-        
-        <div class="header-main">
-            <div class="logo">BeautyHub</div>
-            
-            <div class="search-bar">
-                <input type="text" placeholder="Search for products, brands, or services...">
-                <button class="search-btn">🔍</button>
-            </div>
-            
-            <div class="header-actions">
-                <a href="#">📍 Store Locator</a>
-                <a href="#">👤 Account</a>
-                <a href="#">❤️ Favorites</a>
-                <<a href="cart.html">🛍️ Bag <span class="cart-count">2</span></a>
-            </div>
+        <!-- Product 2 -->
+        <div class="product-card">
+          <div class="product-image">🧴</div>
+          <div class="product-info">
+            <div class="product-brand">The Ordinary</div>
+            <div class="product-name">Niacinamide 10% + Zinc 1%</div>
+            <div class="product-price">$7.90</div>
+            <button class="add-to-cart">Add to Bag</button>
+          </div>
         </div>
-        
-        <nav class="nav-menu">
-            <div class="nav-container">
-                <a href="#">New</a>
-                <a href="#">Makeup</a>
-                <a href="#">Skincare</a>
-                <a href="#">Fragrance</a>
-                <a href="#">Hair</a>
-                <a href="#">Tools & Brushes</a>
-                <a href="#">Bath & Body</a>
-                <a href="#">Men</a>
-                <a href="#">Gifts</a>
-                <a href="#">Sale</a>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Discover Your Beauty</h1>
-                <p>Explore thousands of products from your favorite brands. From makeup to skincare, we have everything you need to feel beautiful.</p>
-                <a href="#products" class="cta-btn">Shop Now</a>
-            </div>
-        </section>
-
-        <section class="features">
-            <div class="container">
-                <h2 class="section-title">Why Shop With Us?</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🚚</div>
-                        <h3>Free Shipping</h3>
-                        <p>Free standard shipping on orders over $35. Beauty Insider members get free shipping on any order.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">↩️</div>
-                        <h3>Easy Returns</h3>
-                        <p>Not satisfied? Return any product within 60 days for a full refund or exchange.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">⭐</div>
-                        <h3>Beauty Insider</h3>
-                        <p>Join our loyalty program for exclusive deals, birthday gifts, and points on every purchase.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="products" id="products">
-            <div class="container">
-                <h2 class="section-title">Featured Products</h2>
-                <div class="products-grid">
-                    <div class="product-card">
-                        <div class="product-image">💄</div>
-                        <div class="product-info">
-                            <div class="product-brand">Rare Beauty</div>
-                            <div class="product-name">Soft Pinch Liquid Blush</div>
-                            <div class="product-price">$20.00</div>
-                            <button class="add-to-cart">Add to Bag</button>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-image">🧴</div>
-                        <div class="product-info">
-                            <div class="product-brand">The Ordinary</div>
-                            <div class="product-name">Niacinamide 10% + Zinc 1%</div>
-                            <div class="product-price">$7.90</div>
-                            <button class="add-to-cart">Add to Bag</button>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-image">✨</div>
-                        <div class="product-info">
-                            <div class="product-brand">Fenty Beauty</div>
-                            <div class="product-name">Killawatt Freestyle Highlighter</div>
-                            <div class="product-price">$38.00</div>
-                            <button class="add-to-cart">Add to Bag</button>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-image">💋</div>
-                        <div class="product-info">
-                            <div class="product-brand">Charlotte Tilbury</div>
-                            <div class="product-name">Pillow Talk Lipstick</div>
-                            <div class="product-price">$38.00</div>
-                            <button class="add-to-cart">Add to Bag</button>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-image">👁️</div>
-                        <div class="product-info">
-                            <div class="product-brand">Urban Decay</div>
-                            <div class="product-name">Naked3 Eyeshadow Palette</div>
-                            <div class="product-price">$56.00</div>
-                            <button class="add-to-cart">Add to Bag</button>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-image">🌸</div>
-                        <div class="product-info">
-                            <div class="product-brand">Drunk Elephant</div>
-                            <div class="product-name">C-Firma Day Serum</div>
-                            <div class="product-price">$80.00</div>
-                            <button class="add-to-cart">Add to Bag</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="newsletter">
-            <div class="container">
-                <h2>Stay in the Know</h2>
-                <p>Get the latest beauty trends, exclusive offers, and insider tips delivered to your inbox.</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email address">
-                    <button type="submit">Subscribe</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Customer Service</h3>
-                    <a href="#">Contact Us</a>
-                    <a href="#">Shipping & Returns</a>
-                    <a href="#">Size Guide</a>
-                    <a href="#">Track Your Order</a>
-                    <a href="#">FAQ</a>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>About BeautyHub</h3>
-                    <a href="#">Our Story</a>
-                    <a href="#">Careers</a>
-                    <a href="#">Press</a>
-                    <a href="#">Investor Relations</a>
-                    <a href="#">Sustainability</a>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Beauty Insider</h3>
-                    <a href="#">Join Now</a>
-                    <a href="#">Program Benefits</a>
-                    <a href="#">Beauty Insider Cash</a>
-                    <a href="#">Exclusive Events</a>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Connect</h3>
-                    <a href="#">Instagram</a>
-                    <a href="#">Facebook</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">YouTube</a>
-                    <a href="#">TikTok</a>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 BeautyHub. All rights reserved. | Privacy Policy | Terms of Service</p>
-            </div>
+        <!-- Product 3 -->
+        <div class="product-card">
+          <div class="product-image">✨</div>
+          <div class="product-info">
+            <div class="product-brand">Fenty Beauty</div>
+            <div class="product-name">Killawatt Freestyle Highlighter</div>
+            <div class="product-price">$38.00</div>
+            <button class="add-to-cart">Add to Bag</button>
+          </div>
         </div>
-    </footer>
+        <!-- Product 4 -->
+        <div class="product-card">
+          <div class="product-image">💋</div>
+          <div class="product-info">
+            <div class="product-brand">Charlotte Tilbury</div>
+            <div class="product-name">Pillow Talk Lipstick</div>
+            <div class="product-price">$38.00</div>
+            <button class="add-to-cart">Add to Bag</button>
+          </div>
+        </div>
+        <!-- Product 5 -->
+        <div class="product-card">
+          <div class="product-image">👁️</div>
+          <div class="product-info">
+            <div class="product-brand">Urban Decay</div>
+            <div class="product-name">Naked3 Eyeshadow Palette</div>
+            <div class="product-price">$56.00</div>
+            <button class="add-to-cart">Add to Bag</button>
+          </div>
+        </div>
+        <!-- Product 6 -->
+        <div class="product-card">
+          <div class="product-image">🌸</div>
+          <div class="product-info">
+            <div class="product-brand">Drunk Elephant</div>
+            <div class="product-name">C-Firma Day Serum</div>
+            <div class="product-price">$80.00</div>
+            <button class="add-to-cart">Add to Bag</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Add to cart functionality
-        const addToCartBtns = document.querySelectorAll('.add-to-cart');
-        const cartCount = document.querySelector('.cart-count');
-        let itemCount = 2;
+  <section class="newsletter">
+    <div class="container">
+      <h2>Stay in the Know</h2>
+      <p>Get the latest beauty trends, exclusive offers, and insider tips delivered to your inbox.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email address">
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+</main>
 
-        addToCartBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                itemCount++;
-                cartCount.textContent = itemCount;
-                
-                // Visual feedback
-                this.style.background = '#28a745';
-                this.textContent = 'Added!';
-                
-                setTimeout(() => {
-                    this.style.background = '#333';
-                    this.textContent = 'Add to Bag';
-                }, 1500);
-            });
-        });
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Customer Service</h3>
+        <a href="#">Contact Us</a><a href="#">Shipping & Returns</a><a href="#">Size Guide</a><a href="#">Track Your Order</a><a href="#">FAQ</a>
+      </div>
+      <div class="footer-section">
+        <h3>About BeautyHub</h3>
+        <a href="#">Our Story</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Investor Relations</a><a href="#">Sustainability</a>
+      </div>
+      <div class="footer-section">
+        <h3>Beauty Insider</h3>
+        <a href="#">Join Now</a><a href="#">Program Benefits</a><a href="#">Beauty Insider Cash</a><a href="#">Exclusive Events</a>
+      </div>
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Twitter</a><a href="#">YouTube</a><a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 BeautyHub. All rights reserved. | Privacy Policy | Terms of Service</p>
+    </div>
+  </div>
+</footer>
 
-        // Newsletter form
-        const newsletterForm = document.querySelector('.newsletter-form');
-        newsletterForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input[type="email"]').value;
-            if (email) {
-                alert('Thank you for subscribing!');
-                this.querySelector('input[type="email"]').value = '';
-            }
-        });
+<script>
+  // Smooth scroll for CTA
+  document.querySelector('.cta-btn').addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector('#products').scrollIntoView({behavior:'smooth'});
+  });
 
-        // Search functionality
-        const searchInput = document.querySelector('.search-bar input');
-        const searchBtn = document.querySelector('.search-btn');
+  // Newsletter demo
+  document.querySelector('.newsletter-form').addEventListener('submit', e=>{
+    e.preventDefault();
+    alert('Thank you for subscribing!');
+    e.target.reset();
+  });
 
-        searchBtn.addEventListener('click', function() {
-            const query = searchInput.value.trim();
-            if (query) {
-                alert(`Searching for: ${query}`);
-            }
-        });
+  // Search demo
+  const searchInput=document.querySelector('.search-bar input');
+  document.querySelector('.search-btn').addEventListener('click', ()=>{
+    const q=searchInput.value.trim();
+    if(q) alert(`Searching for: ${q}`);
+  });
+  searchInput.addEventListener('keypress', e=>{
+    if(e.key==='Enter'){ const q=e.target.value.trim(); if(q) alert(`Searching for: ${q}`); }
+  });
 
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const query = this.value.trim();
-                if (query) {
-                    alert(`Searching for: ${query}`);
-                }
-            }
-        });
+  // ---- Cart storage helpers (shared with cart.html via same LS key) ----
+  const LS_KEY='beautyhub_cart';
+  const readCart=()=>{ try{return JSON.parse(localStorage.getItem(LS_KEY))||[];}catch{return[];} };
+  const writeCart=(data)=>localStorage.setItem(LS_KEY, JSON.stringify(data));
 
-        // Smooth scrolling for CTA button
-        document.querySelector('.cta-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector('#products').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    </script>
+  // ---- Initialize bag badge from storage ----
+  const bagBadge=document.querySelector('.cart-count');
+  const initCount=readCart().reduce((n,it)=>n+(it.qty||0),0);
+  bagBadge.textContent=initCount;
+
+  // ---- Hook Add to Bag buttons ----
+  document.querySelectorAll('.add-to-cart').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const card=btn.closest('.product-card');
+      const name=card.querySelector('.product-name').textContent.trim();
+      const brand=card.querySelector('.product-brand').textContent.trim();
+      const price=parseFloat(card.querySelector('.product-price').textContent.replace('$',''));
+      const icon=card.querySelector('.product-image').textContent.trim();
+      const id=name.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9\-]/g,'');
+
+      const cart=readCart();
+      const i=cart.findIndex(x=>x.id===id);
+      if(i>=0) cart[i].qty+=1;
+      else cart.push({id,brand,name,price,qty:1,icon});
+      writeCart(cart);
+
+      const count=cart.reduce((n,it)=>n+it.qty,0);
+      bagBadge.textContent=count;
+
+      btn.style.background='#28a745'; btn.textContent='Added!';
+      setTimeout(()=>{btn.style.background='#333'; btn.textContent='Add to Bag';},1100);
+    });
+  });
+</script>
 </body>
 </html>
